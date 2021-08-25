@@ -7,7 +7,7 @@ import (
 )
 
 func TestGetByCode(t *testing.T) {
-	expected := models.Buyer{1, 1234, "Bruno", "Santi"}
+	expected := models.Buyer{2, 1234, "Bruno", "Santi"}
 	buyers = append(buyers, &expected)
 	got, _ := GetByCode(expected.Code)
 	assert.Equal(t, expected, got)

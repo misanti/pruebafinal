@@ -8,7 +8,7 @@ import (
 )
 
 func TestSave(t *testing.T) {
-	excpected := models.Buyer{ID: 1, Code: 1234, Name: "Bruno", LastName: "Santi"}
+	excpected := models.Buyer{ID: 3, Code: 1234, Name: "Bruno", LastName: "Santi"}
 	buyer := models.Buyer{Code: 1234, Name: "Bruno", LastName: "Santi"}
 	i, err := Save(buyer)
 	if i != excpected {
@@ -28,7 +28,7 @@ func TestSaveId(t *testing.T) {
 	assert.Equal(t, expected,err)
 }
 func TestSaveFail(t *testing.T) {
-	excpected := models.Buyer{ID: 4, Code: 1234, Name: "Bruno", LastName: "Santi"}
+	excpected := models.Buyer{ID: 10, Code: 1234, Name: "Bruno", LastName: "Santi"}
 	buyer := models.Buyer{Code: 1234, Name: "Bruno", LastName: "Santi"}
 	i, err := Save(buyer)
 	assert.NotEqual(t, excpected, i)
