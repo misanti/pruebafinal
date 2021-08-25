@@ -6,14 +6,14 @@ import (
 	"net/http"
 )
 
-func RegisterControllers(){
+func RegisterControllers() {
 	uc := newBuyerController()
 	http.Handle("/users", *uc)
 	http.Handle("/users/", *uc)
 
 }
 
-func encodeResponseAsJSON(data interface{}, w io.Writer){
+func encodeResponseAsJSON(data interface{}, w io.Writer) {
 	enc := json.NewEncoder(w)
 	enc.Encode(data)
 }

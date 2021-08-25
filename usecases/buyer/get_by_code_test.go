@@ -6,16 +6,17 @@ import (
 	"testing"
 )
 
-func TestGetById(t *testing.T) {
+func TestGetByCode(t *testing.T) {
 	expected := models.Buyer{1, 1234, "Bruno", "Santi"}
 	buyers = append(buyers, &expected)
-	got, _ := Get(expected.ID)
+	got, _ := GetByCode(expected.Code)
 	assert.Equal(t, expected, got)
 
 }
 
-func TestGetByIdFail(t *testing.T) {
+func TestGetByCodeFail(t *testing.T) {
 	expected := models.Buyer{4, 4321, "Bruno", "Santi"}
-	got, _ := Get(expected.ID)
+	got, _ :=GetByCode(expected.Code)
 	assert.NotEqual(t, expected, got)
 }
+

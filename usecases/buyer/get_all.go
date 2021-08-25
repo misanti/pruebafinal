@@ -7,6 +7,6 @@ var (
 	nextID = 1
 )
 
-func GetAll() []*models.Buyer{
+func GetAll() []*models.Buyer {
 	return buyers
 }

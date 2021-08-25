@@ -14,61 +14,61 @@ type buyerController struct {
 }
 
 func (bc buyerController) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path == "/buyers"{
+	if r.URL.Path == "/buyers" {
 		switch r.Method {
 		case http.MethodGet:
-			bc.GetAll(w,r)
+			bc.GetAll(w, r)
 		case http.MethodPost:
-			bc.post(w,r)
+			bc.post(w, r)
 		default:
 			w.WriteHeader(http.StatusNotImplemented)
 		}
-	}else{
+	} else {
 		matches := bc.buyerIDPattern.FindStringSubmatch(r.URL.Path)
-		if len(matches) == 0{
+		if len(matches) == 0 {
 			w.WriteHeader(http.StatusNotFound)
 		}
 		id, err := strconv.Atoi(matches[1])
-		if err != nil{
+		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
 		}
 		switch r.Method {
 		case http.MethodGet:
-			bc.Get(id,w)
+			bc.Get(id, w)
 		case http.MethodDelete:
-			bc.delete(id,w)
+			bc.delete(id, w)
 		default:
 			w.WriteHeader(http.StatusNotImplemented)
 		}
 	}
 }
 
-func(bc *buyerController) GetAll(w http.ResponseWriter, r *http.Request){
+func (bc *buyerController) GetAll(w http.ResponseWriter, r *http.Request) {
 	encodeResponseAsJSON(buyer.GetAll(), w)
 }
-func(bc *buyerController) Get(id int, w http.ResponseWriter) {
+func (bc *buyerController) Get(id int, w http.ResponseWriter) {
 	u, err := buyer.Get(id)
-	if err != nil{
+	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
-	encodeResponseAsJSON(u,w)
+	encodeResponseAsJSON(u, w)
 }
-func(bc *buyerController) post(w http.ResponseWriter, r *http.Request){
+func (bc *buyerController) post(w http.ResponseWriter, r *http.Request) {
 	u, err := bc.parseRequest(r)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte("Could not parse Buyer object"))
 	}
 	u, err = buyer.Save(u)
-	if err != nil{
+	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
-	encodeResponseAsJSON(u,w)
+	encodeResponseAsJSON(u, w)
 }
-func(bc *buyerController) delete(id int, w http.ResponseWriter) {
+func (bc *buyerController) delete(id int, w http.ResponseWriter) {
 	err := buyer.Delete(id)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -77,7 +77,7 @@ func(bc *buyerController) delete(id int, w http.ResponseWriter) {
 	}
 	w.WriteHeader(http.StatusOK)
 }
-func(bc *buyerController) parseRequest(r *http.Request) (models.Buyer, error){
+func (bc *buyerController) parseRequest(r *http.Request) (models.Buyer, error) {
 	dec := json.NewDecoder(r.Body)
 	var u models.Buyer
 	err := dec.Decode(&u)

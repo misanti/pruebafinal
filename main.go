@@ -9,7 +9,8 @@ func main() {
 	controllers.RegisterControllers()
 	err := http.ListenAndServe(":9000", nil)
 	if err != nil {
-		return 
+		return
 	}
 
+	println("Corriendo en puerto 9000")
 }
