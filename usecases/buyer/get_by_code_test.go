@@ -16,7 +16,6 @@ func TestGetByCode(t *testing.T) {
 
 func TestGetByCodeFail(t *testing.T) {
 	expected := models.Buyer{4, 4321, "Bruno", "Santi"}
-	got, _ :=GetByCode(expected.Code)
+	got, _ := GetByCode(expected.Code)
 	assert.NotEqual(t, expected, got)
 }
-

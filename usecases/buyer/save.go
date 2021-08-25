@@ -7,7 +7,7 @@ import (
 
 func Save(buyer models.Buyer) (models.Buyer, error) {
 	if buyer.ID != 0 {
-		return models.Buyer{}, errors.New("new user must not include id")
+		return models.Buyer{}, errors.New("New buyer must not include id")
 	}
 	buyer.ID = nextID
 	nextID++
